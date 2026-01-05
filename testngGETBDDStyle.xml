@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/91733/IdeaProjects/RestAssured_ATB9x_Copy/src/test/java/day2_BDDStyle_HTTPMethods/Get_BDDStyle.java">
+        <classes>
+            <class name="day2_BDDStyle_HTTPMethods.Get_BDDStyle"/>
+         </classes>
+    </test>
+</suite>
