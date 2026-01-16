@@ -1,7 +1,6 @@
 package day2_NonBDDStyle_HTTPMethods;
 
 import io.qameta.allure.Description;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
@@ -10,19 +9,18 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class Put_NonBDDStyle {
+public class Post_BookingNonBDDStyle {
     RequestSpecification req;
     Response res;
     ValidatableResponse vRes;
 
-
-    @Description("Validate the PUT request with positive input")
+    @Description("Validate the POST request with positive input")
     @Test
     public void positiveTest(ITestContext context){
-        String putBody="{\n" +
-                "    \"firstname\" : \"Jaasritha\",\n" +
-                "    \"lastname\" : \"Guthula\",\n" +
-                "    \"totalprice\" : 111,\n" +
+        String postbody="{\n" +
+                "    \"firstname\" : \"bhagya\",\n" +
+                "    \"lastname\" : \"kudupudi\",\n" +
+                "    \"totalprice\" : 123,\n" +
                 "    \"depositpaid\" : true,\n" +
                 "    \"bookingdates\" : {\n" +
                 "        \"checkin\" : \"2018-01-01\",\n" +
@@ -32,15 +30,14 @@ public class Put_NonBDDStyle {
                 "}";
         req=given();
         req.baseUri("https://restful-booker.herokuapp.com");
-        req.basePath("/booking/"+context.getAttribute("bookingId"));
-        req.contentType(ContentType.JSON);
-        req.cookie("token",context.getAttribute("token_value"));
-        req.body(putBody);
+        req.basePath("/booking");
+        req.header("Content-Type","application/json");
+        req.body(postbody);
 
-        res=req.when().log().all().put();
+        res=req.when().log().all().post();
 
         vRes=res.then().log().all().statusCode(200);
-    }
-    }
 
-
+        context.setAttribute("bookingId",vRes.extract().path("bookingid"));
+    }
+}
